@@ -40,12 +40,22 @@ var diretoryTreeToObj = function(dir, done) {
     });
 };
 
+function GetSortOrder(prop) {    
+    return function(a, b) {    
+        if (a[prop] > b[prop]) {    
+            return 1;    
+        } else if (a[prop] < b[prop]) {    
+            return -1;    
+        }    
+        return 0;    
+    }    
+}
 
 var dirTree = ('./src/data/leetcode');
 
 diretoryTreeToObj(dirTree, function(err, res){
     if(err)
         console.error(err);
-
+    res.sort(GetSortOrder("name")); 
     console.log(JSON.stringify(res));
 });
